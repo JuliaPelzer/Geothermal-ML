@@ -63,36 +63,39 @@ def augment_data(input, target):
 
     return input, target
 
-# Automatically select the testing data folders to reproduce results
-test_folders = [5,10,15,20,25,30]
 
-folder_list = [os.path.join(str(data_path), f"batch{i+1}") for i in range(total_batch_groups)]
-print("Train dataset creation ")
-mf_dataset = MultiFolderDataset(folder_list, test_folders, imsize, normalize=True, test=False )
-print("Test dataset creation ")
-mf_dataset_test = MultiFolderDataset(folder_list, test_folders, imsize, normalize=True, test=True)
+if __name__ == "__main__":
+    
+    # Automatically select the testing data folders to reproduce results
+    test_folders = [5,10,15,20,25,30]
 
-# Create the training and testing data arrays
-train_dataset = mf_dataset
-test_dataset = mf_dataset_test
-train_size = int(len(mf_dataset))
-test_size = int(len(mf_dataset_test))
-assert(train_size > 0), "No training data provided. Ensure that the data exists and that the paths are correct"
+    folder_list = [os.path.join(str(data_path), f"batch{i+1}") for i in range(total_batch_groups)]
+    print("Train dataset creation ")
+    mf_dataset = MultiFolderDataset(folder_list, test_folders, imsize, normalize=True, test=False )
+    print("Test dataset creation ")
+    mf_dataset_test = MultiFolderDataset(folder_list, test_folders, imsize, normalize=True, test=True)
 
-#view_image = False      # If True, outputs images of the temperature input data and plume domain
+    # Create the training and testing data arrays
+    train_dataset = mf_dataset
+    test_dataset = mf_dataset_test
+    train_size = int(len(mf_dataset))
+    test_size = int(len(mf_dataset_test))
+    assert(train_size > 0), "No training data provided. Ensure that the data exists and that the paths are correct"
 
-temperature_train, Vmax_train, qx_train, qy_train, loc_off_plume_x_train, loc_off_plume_y_train = train_dataset.extract_plume_data(view_image, length_plume, width_plume, length_scaling, width_scaling)
+    #view_image = False      # If True, outputs images of the temperature input data and plume domain
 
-if (view_image):
-    for i in range(train_size):
-        x = np.linspace(1, 25, 25)
-        y = np.linspace(1, 25, 25)
-        X, Y = np.meshgrid(x, y)
-        Temp = temperature_train[i,:,:]
-        cp = plt.contourf(X, Y, Temp, levels=[11,12,13,14,15],cmap='viridis')
-        plt.colorbar(cp)
-        #plt.imshow(H, interpolation='none',cmap='jet')
-        plt.show()
+    temperature_train, Vmax_train, qx_train, qy_train, loc_off_plume_x_train, loc_off_plume_y_train = train_dataset.extract_plume_data(view_image, length_plume, width_plume, length_scaling, width_scaling)
 
-if (test_size > 0):
-    temperature_test, Vmax_test, qx_test, qy_test, loc_off_plume_x_test, loc_off_plume_y_test = test_dataset.extract_plume_data(view_image)
+    if (view_image):
+        for i in range(train_size):
+            x = np.linspace(1, 25, 25)
+            y = np.linspace(1, 25, 25)
+            X, Y = np.meshgrid(x, y)
+            Temp = temperature_train[i,:,:]
+            cp = plt.contourf(X, Y, Temp, levels=[11,12,13,14,15],cmap='viridis')
+            plt.colorbar(cp)
+            #plt.imshow(H, interpolation='none',cmap='jet')
+            plt.show()
+
+    if (test_size > 0):
+        temperature_test, Vmax_test, qx_test, qy_test, loc_off_plume_x_test, loc_off_plume_y_test = test_dataset.extract_plume_data(view_image)
