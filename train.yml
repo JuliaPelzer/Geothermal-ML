@@ -12,6 +12,6 @@ width_plume: 25
 length_plume: 25
 length_scaling: 3
 width_scaling: 1
-base_path: /home/daviske/Research/Darus/geothermal-ml
-data_path: /home/daviske/Research/Darus/geothermal-ml/data
+base_path: /home/pelzerja/Development/Streamline_approach/geothermal-ml
+data_path: /home/pelzerja/Development/Streamline_approach/geothermal-ml/data
 view_image: True
