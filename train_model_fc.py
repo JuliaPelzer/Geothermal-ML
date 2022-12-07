@@ -96,6 +96,7 @@ if __name__ == "__main__":
             plt.colorbar(cp)
             #plt.imshow(H, interpolation='none',cmap='jet')
             plt.show()
+            # plt.savefig(f'test_outputs/temp{i}.pdf')
 
     if (test_size > 0):
         temperature_test, Vmax_test, qx_test, qy_test, loc_off_plume_x_test, loc_off_plume_y_test = test_dataset.extract_plume_data(view_image)

@@ -44,7 +44,7 @@ Purple = "#cca2e5ff"
 
 colors = [blue, green, yellow, red, purple, gray, Blue, Green, Yellow, Red, Purple, Gray]
 
-mpl.rcParams["backend"] = "cairo"
+# mpl.rcParams["backend"] = "cairo"
 mpl.rcParams["hatch.linewidth"] = 1.5  # previous pdf hatch linewidth
 mpl.rcParams["image.cmap"] = "RdBu"  # 'seismic'  # 'Blues'  # 'viridis' 'RdBu'
 mpl.rcParams["savefig.format"] = "pdf"
